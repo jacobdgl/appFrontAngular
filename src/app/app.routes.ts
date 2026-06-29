@@ -15,5 +15,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/users/user-detail/user-detail').then((m) => m.UserDetail),
   },
+  {
+    path: 'albums/:id',
+    loadComponent: () =>
+      import('./features/albums/album-detail/album-detail').then((m) => m.AlbumDetail),
+  },
   { path: '**', redirectTo: '' },
 ];

@@ -1,0 +1,25 @@
+<section class="album-detail">
+  <p><a class="album-detail__back" routerLink="/users">← Volver</a></p>
+  <h1 class="album-detail__title">Álbum #{{ albumId() }}</h1>
+
+  @if (loading()) {
+    <p class="album-detail__loading">Cargando fotos…</p>
+  } @else if (error()) {
+    <p class="album-detail__error" role="alert">No se pudieron cargar las fotos.</p>
+  } @else if (photos().length > 0) {
+    <ul class="album-detail__grid">
+      @for (photo of photos(); track photo.id) {
+        <li>
+          <img
+            class="album-detail__photo"
+            [src]="photo.thumbnailUrl"
+            [alt]="photo.title"
+            loading="lazy"
+          />
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="album-detail__empty">Este álbum no tiene fotos.</p>
+  }
+</section>
