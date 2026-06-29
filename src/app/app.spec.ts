@@ -14,7 +14,9 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  // TODO(fase-2): el shell demo del CLI fue eliminado en el routing esqueleto.
+  // Este test busca un <h1> "Hello" que ya no existe. Reescribir contra el nav nuevo o borrar.
+  it.skip('should render title', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
