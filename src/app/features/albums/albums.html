@@ -1,0 +1,31 @@
+<section class="albums">
+  <h2 class="albums__title">Álbumes</h2>
+
+  @if (loading()) {
+    <p class="albums__loading">Cargando álbumes…</p>
+  } @else if (error()) {
+    <p class="albums__error" role="alert">No se pudieron cargar los álbumes.</p>
+  } @else if (albums().length > 0) {
+    <ul class="albums__list">
+      @for (item of albums(); track item.album.id) {
+        <li class="albums__item">
+          <a class="albums__link" [routerLink]="['/albums', item.album.id]">
+            @if (item.cover) {
+              <img
+                class="albums__thumb"
+                [src]="item.cover.thumbnailUrl"
+                [alt]="item.album.title"
+                loading="lazy"
+              />
+            } @else {
+              <span class="albums__thumb albums__thumb--empty">Sin fotos</span>
+            }
+            <span class="albums__caption">{{ item.album.title }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="albums__empty">Este usuario no tiene álbumes.</p>
+  }
+</section>

@@ -6,6 +6,7 @@ import { catchError, map, of, startWith, switchMap } from 'rxjs';
 
 import { User } from '../../../core/models';
 import { UserService } from '../../../core/services';
+import { Albums } from '../../albums/albums';
 
 /** Estados explícitos de la carga del detalle. Unión discriminada. */
 type DetailState =
@@ -17,7 +18,7 @@ type DetailState =
 @Component({
   selector: 'app-user-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink],
+  imports: [RouterLink, Albums],
   templateUrl: './user-detail.html',
   styleUrl: './user-detail.scss',
 })

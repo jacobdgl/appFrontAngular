@@ -37,5 +37,7 @@
       <dt>Empresa</dt>
       <dd>{{ u.company.name }}</dd>
     </dl>
+
+    <app-albums [userId]="u.id" />
   </article>
 }
