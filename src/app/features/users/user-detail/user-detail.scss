@@ -1,0 +1,35 @@
+.detail__nav {
+  margin-block-end: 1.5rem;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.detail__state {
+  font-style: italic;
+
+  &--error {
+    color: #b00020;
+    font-style: normal;
+  }
+}
+
+.detail__title {
+  margin-block: 0 1rem;
+}
+
+.detail__list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0;
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
