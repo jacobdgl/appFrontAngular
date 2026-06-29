@@ -1,0 +1,43 @@
+<nav class="detail__nav">
+  <a routerLink="/users">&larr; Volver al listado</a>
+</nav>
+
+@if (status() === 'loading') {
+  <p class="detail__state" role="status">Cargando usuario…</p>
+} @else if (status() === 'notfound') {
+  <p class="detail__state detail__state--error" role="alert">Usuario no encontrado.</p>
+} @else if (status() === 'error') {
+  <p class="detail__state detail__state--error" role="alert">
+    Error al cargar el usuario. Inténtalo de nuevo.
+  </p>
+} @else if (user(); as u) {
+  <article class="detail">
+    <h1 class="detail__title">{{ u.name }}</h1>
+    <dl class="detail__list">
+      <dt>Username</dt>
+      <dd>{{ u.username }}</dd>
+
+      <dt>Email</dt>
+      <dd>
+        <a [href]="'mailto:' + u.email">{{ u.email }}</a>
+      </dd>
+
+      <dt>Ciudad</dt>
+      <dd>{{ u.address.city }}</dd>
+
+      <dt>Website</dt>
+      <dd>
+        @if (websiteUrl(); as url) {
+          <a [href]="url" target="_blank" rel="noopener noreferrer">{{ u.website }}</a>
+        } @else {
+          —
+        }
+      </dd>
+
+      <dt>Empresa</dt>
+      <dd>{{ u.company.name }}</dd>
+    </dl>
+
+    <app-albums [userId]="u.id" />
+  </article>
+}

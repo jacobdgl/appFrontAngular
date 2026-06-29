@@ -1,0 +1,38 @@
+<section class="user-list">
+  <h1>Usuarios</h1>
+
+  @if (loading()) {
+    <p class="state state--loading" role="status">Cargando usuarios…</p>
+  } @else if (error()) {
+    <p class="state state--error" role="alert">
+      No se pudieron cargar los usuarios. Inténtalo de nuevo.
+    </p>
+  } @else if (users().length === 0) {
+    <p class="state state--empty">No hay usuarios.</p>
+  } @else {
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Ciudad</th>
+          <th scope="col">Empresa</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user.id) {
+          <tr>
+            <td>
+              <a [routerLink]="['/users', user.id]">{{ user.name }}</a>
+            </td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.address.city }}</td>
+            <td>{{ user.company.name }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>
