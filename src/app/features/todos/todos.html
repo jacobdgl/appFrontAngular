@@ -1,0 +1,53 @@
+<section class="todos">
+  <h2 class="todos__title">TODOs</h2>
+
+  <form class="todos__add" [formGroup]="addForm" (ngSubmit)="submit()">
+    <label class="todos__field">
+      <span class="todos__label">Nuevo todo</span>
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Solo texto, sin números"
+        autocomplete="off"
+      />
+    </label>
+    <button type="submit">Añadir</button>
+
+    @if (titleControl.invalid && (titleControl.touched || titleControl.dirty)) {
+      <p class="todos__error" role="alert">
+        @if (titleControl.hasError('required')) {
+          El texto es obligatorio.
+        } @else if (titleControl.hasError('hasNumbers')) {
+          El texto no puede contener números.
+        }
+      </p>
+    }
+  </form>
+
+  <label class="todos__field todos__search">
+    <span class="todos__label">Buscar</span>
+    <input
+      type="search"
+      [value]="search()"
+      (input)="onSearch($any($event.target).value)"
+      placeholder="Filtrar en vivo…"
+      autocomplete="off"
+    />
+  </label>
+
+  @if (filteredTodos().length > 0) {
+    <ul class="todos__list">
+      @for (todo of filteredTodos(); track todo.id) {
+        <li class="todos__item" [class.todos__item--done]="todo.completed">
+          <label class="todos__check">
+            <input type="checkbox" [checked]="todo.completed" (change)="toggle(todo.id)" />
+            <span class="todos__text">{{ todo.title }}</span>
+          </label>
+          <button type="button" class="todos__remove" (click)="remove(todo.id)">Borrar</button>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="todos__empty">No hay todos que mostrar.</p>
+  }
+</section>
